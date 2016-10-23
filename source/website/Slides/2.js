@@ -1,16 +1,16 @@
 import React from 'react'
-import { Code, Step } from '../../modules'
+import { Code, ContentSlide, Step } from '../../modules'
 
 const code = require('raw!../../../examples/render-function.js')
 const dimLines = {
   3: [[0, 1], [5, 6]]
 }
 const highlightLines = {
-  4: [[2, 4]]
+  4: [[0, 0], [2,2]]
 }
 
 export default ({ stepIndex }) => (
-  <div className='ContentSlide'>
+  <ContentSlide>
     <h1>Syntax highlighting</h1>
     <p>Slides can also contain syntax highlighting:</p>
     <Step index={1}>
@@ -27,5 +27,5 @@ export default ({ stepIndex }) => (
       <Step index={3}><li>Such as diming specified lines:</li></Step>
       <Step index={4}><li>Or highlighting them:</li></Step>
     </ul>
-  </div>
+  </ContentSlide>
 )

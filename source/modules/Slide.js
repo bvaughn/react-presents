@@ -5,16 +5,16 @@ import { presentationContext, slideContext } from './PropTypes'
 export default class Slide extends Component {
   static childContextTypes = {
     slide: slideContext.isRequired
-  }
+  };
 
   static contextTypes = {
     presentation: presentationContext.isRequired
-  }
+  };
 
   static propTypes = {
     component: PropTypes.any,
     render: PropTypes.any
-  }
+  };
 
   constructor (props, context) {
     super(props, context)

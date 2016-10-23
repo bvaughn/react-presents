@@ -1,8 +1,8 @@
 import React from 'react'
-import { Step } from '../../modules'
+import { ContentSlide, Step } from '../../modules'
 
 export default () => (
-  <div className='ContentSlide'>
+  <ContentSlide>
     <h1>A simple slide</h1>
     <ul>
       <li>Slides can contain multiple steps.</li>
@@ -10,5 +10,5 @@ export default () => (
       <Step index={2}><li>Or it can be additive</li></Step>
       <Step index={3}><li>(By default it is additive)</li></Step>
     </ul>
-  </div>
+  </ContentSlide>
 )

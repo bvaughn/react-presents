@@ -4,9 +4,6 @@ import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
 
-import './theme.css'
-import '../styles.css'
-
 import Application from './Application'
 
 render(

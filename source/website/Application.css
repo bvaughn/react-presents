@@ -1,8 +1,7 @@
-html, body, :global(#root) {
+:global(#root) {
   height: 100%;
 }
 
-* {
-  font-size: inherit;
-  box-sizing: inherit;
+.fa {
+  color: #777872;
 }

@@ -11,17 +11,13 @@ ES6, CommonJS, and UMD builds are available with each distribution.
 For example:
 
 ```js
-// If you want the custom CodeMirror theme, include the styles:
-import 'react-presents/dist/styles.css'
-
-// Then you can import the components you want like so:
+// Import the components you want like so:
 import { Presentation, Slide } from 'react-presents'
 ```
 
-Alternately you can load a global-friendly UMD build:
+Alternately you can load a global-friendly UMD build which exposes a global `ReactPresents` object:
 
 ```html
-<link rel="stylesheet" href="path/to/react-presents/dist/styles.css">
 <script src="path/to/react-presents/dist/umd/react-presents.js"></script>
 ```
 

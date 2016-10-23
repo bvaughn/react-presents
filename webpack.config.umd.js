@@ -10,7 +10,7 @@ module.exports = {
     path: 'dist/umd',
     filename: '[name].js',
     libraryTarget: 'umd',
-    library: 'react-presents'
+    library: 'ReactPresents'
   },
   externals: {
     react: {

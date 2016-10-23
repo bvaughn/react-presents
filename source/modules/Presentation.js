@@ -1,20 +1,24 @@
 import React, { Component, PropTypes } from 'react'
 import { HashRouter, Match, Redirect } from 'react-router'
 import { presentationContext } from './PropTypes'
+import TouchNav from './TouchNav'
+import setDefaultTheme from './setDefaultTheme'
 
 export default class Presentation extends Component {
   static childContextTypes = {
     presentation: presentationContext.isRequired
-  }
+  };
 
   static defaultProps = {
+    disableTheme: false,
     router: HashRouter
-  }
+  };
 
   static propTypes = {
     children: PropTypes.any.isRequired,
+    disableTheme: PropTypes.bool.isRequired,
     router: PropTypes.any.isRequired
-  }
+  };
 
   constructor (props, context) {
     super(props, context)
@@ -24,6 +28,16 @@ export default class Presentation extends Component {
     this._slideIndexMap = {}
     this._stepIndex = 0
 
+    if (props.disableTheme !== true) {
+      setDefaultTheme()
+    }
+
+    this.getPatternForSlide = this.getPatternForSlide.bind(this)
+    this.getSlideIndex = this.getSlideIndex.bind(this)
+    this.getStepIndex = this.getStepIndex.bind(this)
+    this.goBack = this.goBack.bind(this)
+    this.goForward = this.goForward.bind(this)
+    this.goToSlide = this.goToSlide.bind(this)
     this._onKeyDown = this._onKeyDown.bind(this)
   }
 
@@ -58,6 +72,48 @@ export default class Presentation extends Component {
     return this._stepIndex
   }
 
+  goBack () {
+    let slideIndex = this._slideIndex
+    let stepIndex = this._stepIndex
+
+    if (stepIndex > 0) {
+      stepIndex--
+    } else if (slideIndex > 0) {
+      slideIndex--
+      stepIndex = this._getNumStepsForSlide(slideIndex) - 1
+    }
+
+    this.goToSlide({ slideIndex, stepIndex })
+  }
+
+  goForward () {
+    let slideIndex = this._slideIndex
+    let stepIndex = this._stepIndex
+
+    const numCurrentSlideSteps = this._getNumStepsForSlide(slideIndex)
+    const numSlides = Object.keys(this._slideIndexMap).length
+
+    if (stepIndex + 1 < numCurrentSlideSteps) {
+      stepIndex++
+    } else if (slideIndex + 1 < numSlides) {
+      slideIndex++
+      stepIndex = 0
+    }
+
+    this.goToSlide({ slideIndex, stepIndex })
+  }
+
+  goToSlide ({ slideIndex, stepIndex }) {
+    if (
+      slideIndex !== this._slideIndex ||
+      stepIndex !== this._stepIndex
+    ) {
+      const path = this._createPath({ slideIndex, stepIndex })
+
+      this._router.replaceWith(path)
+    }
+  }
+
   render () {
     const { children, router: Router } = this.props
 
@@ -86,6 +142,8 @@ export default class Presentation extends Component {
                 ? children({ presentation: this })
                 : children
               }
+
+              <TouchNav />
             </div>
           )
         }}
@@ -121,43 +179,18 @@ export default class Presentation extends Component {
       return
     }
 
-    let slideIndex = this._slideIndex
-    let stepIndex = this._stepIndex
-
     switch (event.key) {
       case 'ArrowLeft':
-        if (stepIndex > 0) {
-          stepIndex--
-        } else if (slideIndex > 0) {
-          slideIndex--
-          stepIndex = this._getNumStepsForSlide(slideIndex) - 1
-        }
+        this.goBack()
         break
       case 'ArrowRight':
       case 'Enter':
       case ' ':
-        const numCurrentSlideSteps = this._getNumStepsForSlide(slideIndex)
-        const numSlides = Object.keys(this._slideIndexMap).length
-
-        if (stepIndex + 1 < numCurrentSlideSteps) {
-          stepIndex++
-        } else if (slideIndex + 1 < numSlides) {
-          slideIndex++
-          stepIndex = 0
-        }
+        this.goForward()
         break
       default:
         // Linting requires this :)
         break
-    }
-
-    if (
-      slideIndex !== this._slideIndex ||
-      stepIndex !== this._stepIndex
-    ) {
-      const path = this._createPath({ slideIndex, stepIndex })
-
-      this._router.replaceWith(path)
     }
   }
 }

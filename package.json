@@ -1,14 +1,13 @@
 {
   "name": "react-presents",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Slideshow framework built w/ react-router 4",
   "main": "dist/commonjs/index.js",
   "module": "dist/es/index.js",
   "jsnext:main": "dist/es/index.js",
   "scripts": {
-    "build": "npm run build:commonjs && npm run build:css && npm run build:es && npm run build:website && npm run build:umd",
+    "build": "npm run build:commonjs && npm run build:es && npm run build:website && npm run build:umd",
     "build:commonjs": "npm run clean:commonjs && cross-env NODE_ENV=production cross-env BABEL_ENV=commonjs babel source/modules/ --out-dir dist/commonjs --ignore *.example.js,*.test.js",
-    "build:css": "postcss --use autoprefixer source/styles.css > dist/styles.css",
     "build:website": "npm run clean:website && cross-env NODE_ENV=production webpack --config webpack.config.website.js -p --bail",
     "build:es": "npm run clean:es && cross-env NODE_ENV=production cross-env BABEL_ENV=es babel source/modules/ --out-dir dist/es --ignore *.example.js,*.test.js",
     "build:umd": "npm run clean:umd && cross-env NODE_ENV=production webpack --config webpack.config.umd.js --bail",
@@ -100,7 +99,8 @@
   },
   "dependencies": {
     "babel-runtime": "^6.11.6",
-    "codemirror": "^5.18.0"
+    "codemirror": "^5.18.0",
+    "styled-components": "^1.0.8"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0"
