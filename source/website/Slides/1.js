@@ -1,7 +1,7 @@
 import React from 'react'
 import { ContentSlide, Step } from '../../modules'
 
-export default () => (
+const slide = () => (
   <ContentSlide>
     <h1>A simple slide</h1>
     <ul>
@@ -12,3 +12,7 @@ export default () => (
     </ul>
   </ContentSlide>
 )
+
+slide.title = 'A simple slide'
+
+export default slide

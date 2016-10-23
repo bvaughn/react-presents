@@ -1,6 +1,6 @@
 {
   "name": "react-presents",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Slideshow framework built w/ react-router 4",
   "main": "dist/commonjs/index.js",
   "module": "dist/es/index.js",
@@ -84,6 +84,7 @@
     "postcss-loader": "^0.9.1",
     "raw-loader": "^0.5.1",
     "react": "^15.3.1",
+    "react-addons-shallow-compare": "^15.3.2",
     "react-codemirror": "^0.2.6",
     "react-dom": "^15.3.2",
     "react-router": "^4.0.0-alpha.5",
@@ -103,6 +104,7 @@
     "styled-components": "^1.0.8"
   },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0"
+    "react": "^0.14.0 || ^15.0.0",
+    "react-dom": "^0.14.0 || ^15.0.0"
   }
 }

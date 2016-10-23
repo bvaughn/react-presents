@@ -6,10 +6,10 @@ const dimLines = {
   3: [[0, 1], [5, 6]]
 }
 const highlightLines = {
-  4: [[0, 0], [2,2]]
+  4: [[0, 0], [2, 2]]
 }
 
-export default ({ stepIndex }) => (
+const slide = ({ stepIndex }) => (
   <ContentSlide>
     <h1>Syntax highlighting</h1>
     <p>Slides can also contain syntax highlighting:</p>
@@ -29,3 +29,7 @@ export default ({ stepIndex }) => (
     </ul>
   </ContentSlide>
 )
+
+slide.title = 'Syntax highlighting'
+
+export default slide

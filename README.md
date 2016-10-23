@@ -33,6 +33,14 @@ const slides = require.context('./Slides/', false, /\.js$/)
   .map((filename) => filename.replace('./', ''))
   .map((filename) => require(`./Slides/${filename}`).default)
 
+// Example of supporting jump-to-sides via a drop-down menu:
+const options = slides
+  .map((slide, index) => ({
+    label: slide.title,
+    value: index
+  }))
+  .filter((option) => option.label)
+
 // Example of rendering all of your slides in the order they loaded:
 import React from 'react'
 import { Presentation, Slide } from 'react-presents'
@@ -43,7 +51,12 @@ export default () => (
         component={Component}
         key={index}
       />
-    ))}
+    )).concat(
+      <DropDownNav
+        key='DropDownNav'
+        options={options}
+      />
+    )}
   </Presentation>
 )
 
@@ -61,6 +74,26 @@ export default () => (
     </ul>
   </div>
 )
+
+// Example of a slide with a DropDownNav title:
+import React from 'react'
+import { Code, ContentSlide } from '../../modules'
+const slide = ({ stepIndex }) => (
+  <ContentSlide>
+    <h1>Syntax highlighting</h1>
+    <p>Slides can also contain syntax highlighting:</p>
+    <Code
+      dimLines={[[0,1]]}
+      highlightLines={[[3,5]]}
+      value={require('raw!path/to/code.js')}
+    />
+  </ContentSlide>
+)
+
+slide.title = 'Syntax highlighting'
+
+export default slide
+
 ```
 
 License

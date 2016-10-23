@@ -103,7 +103,7 @@ export default class Presentation extends Component {
     this.goToSlide({ slideIndex, stepIndex })
   }
 
-  goToSlide ({ slideIndex, stepIndex }) {
+  goToSlide ({ slideIndex, stepIndex = 0 }) {
     if (
       slideIndex !== this._slideIndex ||
       stepIndex !== this._stepIndex
