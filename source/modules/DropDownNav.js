@@ -47,11 +47,11 @@ const SelectWrapper = styled.div`
 export default class NavigateToSlide extends Component {
   static contextTypes = {
     presentation: presentationContext.isRequired
-  }
+  };
 
   static propTypes = {
     options: PropTypes.array.isRequired
-  }
+  };
 
   constructor (props, context) {
     super(props, context)
@@ -78,15 +78,7 @@ export default class NavigateToSlide extends Component {
     const { options } = this.props
     const { active } = this.state
 
-    if (!active) {
-      return (
-        <ButtonGroup>
-          <IconButton onClick={() => this.setState({ active: true })}>
-            <IconMore />
-          </IconButton>
-        </ButtonGroup>
-      )
-    } else {
+    if (active) {
       return (
         <Overlay>
           <SelectWrapper>
@@ -107,6 +99,16 @@ export default class NavigateToSlide extends Component {
           </SelectWrapper>
         </Overlay>
       )
+    } else if (options.length) {
+      return (
+        <ButtonGroup>
+          <IconButton onClick={() => this.setState({ active: true })}>
+            <IconMore />
+          </IconButton>
+        </ButtonGroup>
+      )
+    } else {
+      return null
     }
   }
 

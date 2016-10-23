@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Path = styled.path`
-  fill: #fff;
+  fill: currentColor;
 `
 
 export function SvgIconWrapper ({ children, ...rest }) {

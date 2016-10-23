@@ -10,5 +10,11 @@ export default styled.button`
   margin-left: 0.5rem;
   padding: 0;
   background: rgba(124, 124, 124, 0.25);
+  color: #fff;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+
+  &:disabled {
+    background: rgba(124, 124, 124, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+  }
 `

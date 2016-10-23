@@ -5,13 +5,13 @@ export default class Step extends Component {
   static contextTypes = {
     presentation: presentationContext.isRequired,
     slide: slideContext.isRequired
-  }
+  };
 
   static propTypes = {
     children: PropTypes.node.isRequired,
     exact: PropTypes.bool,
     index: PropTypes.number.isRequired
-  }
+  };
 
   componentWillMount () {
     const { slide } = this.context

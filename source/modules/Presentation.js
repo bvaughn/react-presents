@@ -72,6 +72,23 @@ export default class Presentation extends Component {
     return this._stepIndex
   }
 
+  isAtBeginning () {
+    return (
+      this._slideIndex === 0 &&
+      this._stepIndex === 0
+    )
+  }
+
+  isAtEnd () {
+    const numSlides = Object.keys(this._slideIndexMap).length
+    const numLastSlideSteps = this._getNumStepsForSlide(numSlides - 1)
+
+    return (
+      this._slideIndex === numSlides - 1 &&
+      this._stepIndex === numLastSlideSteps - 1
+    )
+  }
+
   goBack () {
     let slideIndex = this._slideIndex
     let stepIndex = this._stepIndex

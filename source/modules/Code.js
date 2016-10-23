@@ -17,14 +17,14 @@ export default class Code extends Component {
     codeMirrorOptions: {},
     dimLines: [],
     highlightLines: []
-  }
+  };
 
   static propTypes = {
     codeMirrorOptions: PropTypes.object.isRequired,
     dimLines: PropTypes.array.isRequired,
     highlightLines: PropTypes.array.isRequired,
     value: PropTypes.string.isRequired
-  }
+  };
 
   componentDidMount () {
     const { dimLines, highlightLines } = this.props

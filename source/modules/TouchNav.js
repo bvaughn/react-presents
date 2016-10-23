@@ -25,10 +25,16 @@ export default class TouchNav extends Component {
 
     return (
       <ButtonGroup>
-        <IconButton onClick={presentation.goBack}>
+        <IconButton
+          disabled={presentation.isAtBeginning()}
+          onClick={presentation.goBack}
+        >
           <IconLeft />
         </IconButton>
-        <IconButton onClick={presentation.goForward}>
+        <IconButton
+          disabled={presentation.isAtEnd()}
+          onClick={presentation.goForward}
+        >
           <IconRight />
         </IconButton>
       </ButtonGroup>
