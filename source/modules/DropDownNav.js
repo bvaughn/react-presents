@@ -12,6 +12,11 @@ const ButtonGroup = styled.div`
   position: absolute;
   top: 1rem;
   right: 7rem;
+
+  @media (max-width: 600px) {
+    top: 0.5rem;
+    right: 6.5rem;
+  }
 `
 
 const Overlay = styled.div`
