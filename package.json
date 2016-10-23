@@ -1,0 +1,11 @@
+{
+  "name": "react-presents",
+  "version": "0.0.1",
+  "description": "Slideshow framework built w/ react-router 4",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brian Vaughn <brian.david.vaughn@gmail.com>",
+  "license": "MIT"
+}
