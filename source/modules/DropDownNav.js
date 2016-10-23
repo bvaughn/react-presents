@@ -44,6 +44,12 @@ const SelectWrapper = styled.div`
   }
 `
 
+const Row = styled.div`
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
 export default class NavigateToSlide extends Component {
   static contextTypes = {
     presentation: presentationContext.isRequired
@@ -63,6 +69,7 @@ export default class NavigateToSlide extends Component {
     this._onChange = this._onChange.bind(this)
     this._onClick = this._onClick.bind(this)
     this._onKeyDown = this._onKeyDown.bind(this)
+    this._optionRenderer = this._optionRenderer.bind(this)
   }
 
   componentDidMount () {
@@ -153,5 +160,33 @@ export default class NavigateToSlide extends Component {
         })
         break
     }
+  }
+
+  _optionRenderer ({ focusedOption, focusOption, key, labelKey, option, selectValue, style }) {
+    const classNames = ['VirtualizedSelectOption']
+    if (option === focusedOption) {
+      classNames.push('VirtualizedSelectFocusedOption')
+    }
+    if (option.disabled) {
+      classNames.push('VirtualizedSelectOptionHeader')
+    }
+
+    const events = option.disabled
+      ? {}
+      : {
+        onClick: () => selectValue(option),
+        onMouseOver: () => focusOption(option)
+      }
+
+    return (
+      <Row
+        className={classNames.join(' ')}
+        key={key}
+        style={style}
+        {...events}
+      >
+        {option[labelKey]}
+      </Row>
+    )
   }
 }
