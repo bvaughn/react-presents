@@ -1,0 +1,7 @@
+general:
+  branches:
+    ignore:
+      - gh-pages
+machine:
+  node:
+    version: v6.6.0
