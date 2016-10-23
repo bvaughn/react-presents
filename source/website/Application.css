@@ -1,0 +1,8 @@
+html, body, :global(#root) {
+  height: 100%;
+}
+
+* {
+  font-size: inherit;
+  box-sizing: inherit;
+}

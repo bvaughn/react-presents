@@ -2,10 +2,107 @@
   "name": "react-presents",
   "version": "0.0.1",
   "description": "Slideshow framework built w/ react-router 4",
-  "main": "index.js",
+  "main": "dist/commonjs/index.js",
+  "module": "dist/es/index.js",
+  "jsnext:main": "dist/es/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run build:commonjs && npm run build:css && npm run build:es && npm run build:website && npm run build:umd",
+    "build:commonjs": "npm run clean:commonjs && cross-env NODE_ENV=production cross-env BABEL_ENV=commonjs babel source/modules/ --out-dir dist/commonjs --ignore *.example.js,*.test.js",
+    "build:css": "postcss --use autoprefixer source/styles.css > dist/styles.css",
+    "build:website": "npm run clean:website && cross-env NODE_ENV=production webpack --config webpack.config.website.js -p --bail",
+    "build:es": "npm run clean:es && cross-env NODE_ENV=production cross-env BABEL_ENV=es babel source/modules/ --out-dir dist/es --ignore *.example.js,*.test.js",
+    "build:umd": "npm run clean:umd && cross-env NODE_ENV=production webpack --config webpack.config.umd.js --bail",
+    "clean": "npm run clean:commonjs && npm run clean:website && npm run clean:es && npm run clean:umd",
+    "clean:commonjs": "rimraf dist/commonjs",
+    "clean:website": "rimraf build",
+    "clean:es": "rimraf dist/es",
+    "clean:umd": "rimraf dist/umd",
+    "deploy": "gh-pages -d build",
+    "lint": "standard",
+    "prebuild": "npm run lint",
+    "predeploy": "cp ./circle.yml ./build/",
+    "postpublish": "npm run deploy",
+    "prepublish": "npm run build",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --config webpack.config.dev.js",
+    "watch": "watch 'clear && npm run test -s' source",
+    "watch:nolint": "watch 'clear && npm run test:unit' source"
   },
   "author": "Brian Vaughn <brian.david.vaughn@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bvaughn/react-presents.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "slides",
+    "slideshow",
+    "presentation"
+  ],
+  "bugs": {
+    "url": "https://github.com/bvaughn/react-presents/issues"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "dist",
+      "examples"
+    ],
+    "global": []
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.2.3",
+    "babel-cli": "6.8.0",
+    "babel-core": "^6.5.1",
+    "babel-eslint": "^6.0.4",
+    "babel-loader": "^6.2.3",
+    "babel-plugin-react-transform": "^2.0.0",
+    "babel-plugin-transform-react-inline-elements": "^6.6.5",
+    "babel-plugin-transform-react-remove-prop-types": "^0.2.10",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-plugin-typecheck": "^3.9.0",
+    "babel-polyfill": "^6.5.0",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-es2015-rollup": "^1.1.1",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-1": "^6.5.0",
+    "bluebird": "^3.0.5",
+    "cross-env": "^1.0.7",
+    "css-loader": "^0.23.0",
+    "express": "^4.13.3",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    "fs-extra": "^0.30.0",
+    "gh-pages": "^0.11.0",
+    "html-webpack-plugin": "^2.16.1",
+    "immutable": "^3.7.5",
+    "postcss": "^5.0.14",
+    "postcss-cli": "^2.3.3",
+    "postcss-loader": "^0.9.1",
+    "raw-loader": "^0.5.1",
+    "react": "^15.3.1",
+    "react-codemirror": "^0.2.6",
+    "react-dom": "^15.3.2",
+    "react-router": "^4.0.0-alpha.5",
+    "react-transform-catch-errors": "^1.0.2",
+    "react-transform-hmr": "^1.0.2",
+    "redbox-react": "^1.0.1",
+    "rimraf": "^2.4.3",
+    "standard": "^7.0.1",
+    "style-loader": "^0.13.0",
+    "watch": "^0.18.0",
+    "webpack": "^1.9.6",
+    "webpack-dev-server": "^1.14.0"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.11.6",
+    "codemirror": "^5.18.0"
+  },
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0"
+  }
 }
