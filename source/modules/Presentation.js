@@ -94,13 +94,25 @@ export default class Presentation extends Component {
     let stepIndex = this._stepIndex
 
     if (stepIndex > 0) {
-      stepIndex--
+      this.goToSlide({
+        slideIndex,
+        stepIndex: stepIndex - 1
+      })
     } else if (slideIndex > 0) {
       slideIndex--
-      stepIndex = this._getNumStepsForSlide(slideIndex) - 1
-    }
 
-    this.goToSlide({ slideIndex, stepIndex })
+      // Ensure this slide has been processed at least once so we can accurately access the step-count
+      this.goToSlide({
+        slideIndex
+      })
+
+      stepIndex = this._getNumStepsForSlide(slideIndex) - 1
+
+      this.goToSlide({
+        slideIndex,
+        stepIndex
+      })
+    }
   }
 
   goForward () {
