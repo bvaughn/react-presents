@@ -1,5 +1,6 @@
 import { injectGlobal } from 'styled-components'
 import Typography from 'typography'
+import CodePlugin from 'typography-plugin-code'
 
 const theme = {
   baseFontSize: '20px',
@@ -7,13 +8,30 @@ const theme = {
   headerFontFamily: ['Yanone Kaffeesatz', 'sans-serif'],
   headerWeight: 400,
   scaleRatio: 2.5,
-  overrideStyles: ({rhythm}) => ({
+  plugins: [
+    new CodePlugin()
+  ],
+  overrideStyles: ({scale, rhythm}) => ({
+    'h1,h2,h3,h4,h5,h6': {
+      color: 'inherit'
+    },
     li: {
-      marginBottom: 0,
+      marginBottom: 0
     },
     '.ReactCodeMirror': {
-      marginBottom: rhythm(1),
+      marginBottom: rhythm(1)
     },
+    'tt, code': {
+      fontSize: '70%'
+    },
+    '.CodeMirror pre': {
+      ...scale(-2 / 5),
+      lineHeight: '1.42'
+    },
+    a: {
+      color: '#F92672',
+      textDecoration: 'none'
+    }
   })
 }
 
@@ -24,17 +42,6 @@ export default () => {
     ${typography.toString()}
     html, body, #root {
       height: 100%;
-    }
-
-    a {
-      color: #F92672;
-      text-decoration: none;
-    }
-
-    code {
-      background: #e7e8e2;
-      border-radius: 5px;
-      font-family: monospace;
     }
 
     button {

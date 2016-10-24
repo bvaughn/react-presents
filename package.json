@@ -103,7 +103,8 @@
     "codemirror": "^5.18.0",
     "react-virtualized-select": "^2.1.0",
     "styled-components": "^1.0.8",
-    "typography": "^0.14.0"
+    "typography": "^0.14.0",
+    "typography-plugin-code": "^0.14.0"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0",
