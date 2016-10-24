@@ -9,4 +9,9 @@ export default styled.div`
   height: 100%;
   background-color: #222;
   color: #fff;
+  padding: 1rem;
+
+  @media (max-width: 600px) {
+    padding: 0.5rem;
+  }
 `

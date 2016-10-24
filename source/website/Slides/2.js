@@ -11,7 +11,7 @@ const highlightLines = {
 
 const slide = ({ stepIndex }) => (
   <ContentSlide>
-    <h1>Syntax highlighting</h1>
+    <h1>{slide.title}</h1>
     <p>Slides can also contain syntax highlighting:</p>
     <Step index={1}>
       <Code
@@ -24,7 +24,7 @@ const slide = ({ stepIndex }) => (
       <p>This is handled by <code>CodeMirror</code> but with a few convenience features:</p>
     </Step>
     <ul>
-      <Step index={3}><li>Such as diming specified lines:</li></Step>
+      <Step index={3}><li>Such as dimming specified lines:</li></Step>
       <Step index={4}><li>Or highlighting them:</li></Step>
     </ul>
   </ContentSlide>
