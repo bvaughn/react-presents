@@ -3,7 +3,7 @@ import { ContentSlide, Step } from '../../modules'
 
 const slide = () => (
   <ContentSlide>
-    <h1>A simple slide</h1>
+    <h1>{slide.title}</h1>
     <ul>
       <li>Slides can contain multiple steps.</li>
       <Step index={1} exact><li>Sub-text can appear only for a specific step</li></Step>

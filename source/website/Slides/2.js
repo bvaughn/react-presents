@@ -11,7 +11,7 @@ const highlightLines = {
 
 const slide = ({ stepIndex }) => (
   <ContentSlide>
-    <h1>Syntax highlighting</h1>
+    <h1>{slide.title}</h1>
     <p>Slides can also contain syntax highlighting:</p>
     <Step index={1}>
       <Code
