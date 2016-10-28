@@ -1,6 +1,9 @@
 Changelog
 ------------
 
+##### 0.5.0
+Added `setNumSteps` method to `Slide` to enable custom step counts (without relying on `Step`).
+
 ##### 0.4.3
 Updated typography-related CSS to use Typography.js.
 Also added missing Google font import.
