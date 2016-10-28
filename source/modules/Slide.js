@@ -41,7 +41,7 @@ export default class Slide extends Component {
   }
 
   getNumSteps () {
-    return this._stepIndex + 1
+    return this._numSteps || this._stepIndex + 1
   }
 
   registerStep (index) {
@@ -55,6 +55,10 @@ export default class Slide extends Component {
         render={this._renderComponent}
       />
     )
+  }
+
+  setNumSteps (numSteps: number) {
+    this._numSteps = numSteps
   }
 
   _renderComponent () {

@@ -12,5 +12,7 @@ export const presentationContext = PropTypes.shape({
 })
 
 export const slideContext = PropTypes.shape({
-  registerStep: PropTypes.func.isRequired
+  getNumSteps: PropTypes.func.isRequired,
+  registerStep: PropTypes.func.isRequired,
+  setNumSteps: PropTypes.func.isRequired
 })
