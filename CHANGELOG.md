@@ -1,6 +1,10 @@
 Changelog
 ------------
 
+##### 0.6.1
+Google fonts now auto-loaded by default theme.
+Prevent main header from overlapping `TouchNav` buttons with right padding.
+
 ##### 0.6.0
 `Slide` takes (optional) `maxIndex` property of `Step` into account as well when determining the max number of steps.
 Touch nav button color changed for improved visibility.

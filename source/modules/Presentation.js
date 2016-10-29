@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { HashRouter, Match, Redirect } from 'react-router'
+import DefaultTheme from './DefaultTheme'
 import { presentationContext } from './PropTypes'
 import TouchNav from './TouchNav'
-import setDefaultTheme from './setDefaultTheme'
 
 export default class Presentation extends Component {
   static childContextTypes = {
@@ -27,10 +27,6 @@ export default class Presentation extends Component {
     this._slideIndex = 0
     this._slideIndexMap = {}
     this._stepIndex = 0
-
-    if (props.disableTheme !== true) {
-      setDefaultTheme()
-    }
 
     this.getPatternForSlide = this.getPatternForSlide.bind(this)
     this.getSlideIndex = this.getSlideIndex.bind(this)
@@ -144,7 +140,7 @@ export default class Presentation extends Component {
   }
 
   render () {
-    const { children, router: Router } = this.props
+    const { children, disableTheme, router: Router } = this.props
 
     return (
       <Router>
@@ -173,6 +169,10 @@ export default class Presentation extends Component {
               }
 
               <TouchNav />
+
+              {!disableTheme && (
+                <DefaultTheme />
+              )}
             </div>
           )
         }}

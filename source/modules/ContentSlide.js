@@ -7,4 +7,8 @@ export default styled.div`
   @media (max-width: 600px) {
     padding: 0.5rem;
   }
+
+  h1 {
+    paddingRight: 9rem;
+  }
 `
