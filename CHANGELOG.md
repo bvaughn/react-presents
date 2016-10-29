@@ -1,6 +1,10 @@
 Changelog
 ------------
 
+##### 0.6.0
+`Slide` takes (optional) `maxIndex` property of `Step` into account as well when determining the max number of steps.
+Touch nav button color changed for improved visibility.
+
 ##### 0.5.0
 Added `setNumSteps` method to `Slide` to enable custom step counts (without relying on `Step`).
 

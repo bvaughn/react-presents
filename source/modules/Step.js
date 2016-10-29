@@ -20,9 +20,13 @@ export default class Step extends Component {
 
   componentWillMount () {
     const { slide } = this.context
-    const { index } = this.props
+    const { index, maxIndex } = this.props
 
-    slide.registerStep(index)
+    if (maxIndex < Infinity) {
+      slide.registerStep(maxIndex)
+    } else {
+      slide.registerStep(index)
+    }
   }
 
   render () {
