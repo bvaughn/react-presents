@@ -1,6 +1,9 @@
 Changelog
 ------------
 
+##### 0.6.2
+Tweaked default theme paragraphy margins.
+
 ##### 0.6.1
 Google fonts now auto-loaded by default theme.
 Prevent main header from overlapping `TouchNav` buttons with right padding.

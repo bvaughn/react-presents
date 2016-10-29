@@ -40,10 +40,6 @@ const globalStyles = `
     background-color: #CFD8DC;
     cursor: default;
   }
-
-  p {
-    margin: 0.75rem 0;
-  }
 `
 
 const typography = new Typography({
@@ -68,6 +64,9 @@ const typography = new Typography({
   overrideStyles: ({scale, rhythm}) => ({
     'h1,h2,h3,h4,h5,h6': {
       color: 'inherit'
+    },
+    p: {
+      marginBottom: '0.75rem'
     },
     li: {
       marginBottom: 0
