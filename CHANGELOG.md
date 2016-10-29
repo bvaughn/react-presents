@@ -1,6 +1,9 @@
 Changelog
 ------------
 
+##### 0.6.3
+Improved disabled `Button` style for default theme.
+
 ##### 0.6.2
 Tweaked default theme paragraphy margins.
 

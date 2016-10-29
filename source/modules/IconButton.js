@@ -19,7 +19,6 @@ export default styled.button`
   }
 
   &:disabled {
-    background: rgba(124, 124, 124, 0.1);
-    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(249, 38, 114, 0.25);
   }
 `
