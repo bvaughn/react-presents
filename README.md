@@ -94,6 +94,13 @@ slide.title = 'Syntax highlighting'
 
 export default slide
 
+// To disable the default theme use the :disableTheme property:
+```jsx
+<Presentation disableTheme>
+  {slides}
+</Presentation>
+```
+
 ```
 
 License

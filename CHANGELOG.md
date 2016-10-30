@@ -1,6 +1,11 @@
 Changelog
 ------------
 
+##### 0.6.4
+Removed dependency on Typography.js.
+
+This is not meant as a criticism of the library. It simply sets too many default styles that I found myself overriding.
+
 ##### 0.6.3
 Improved disabled `Button` style for default theme.
 

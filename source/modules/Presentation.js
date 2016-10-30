@@ -155,6 +155,10 @@ export default class Presentation extends Component {
                 width: '100%'
               }}
             >
+              {!disableTheme && (
+                <DefaultTheme />
+              )}
+
               <Match
                 exactly
                 pattern='/'
@@ -169,10 +173,6 @@ export default class Presentation extends Component {
               }
 
               <TouchNav />
-
-              {!disableTheme && (
-                <DefaultTheme />
-              )}
             </div>
           )
         }}
