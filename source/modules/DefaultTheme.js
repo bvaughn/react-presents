@@ -51,7 +51,7 @@ const globalStyles = `
   }
 
   li {
-    margin: 0 0.5rem;
+    margin: 0 0 0.5rem;
   }
 
   html, body, #root {

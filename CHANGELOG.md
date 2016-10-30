@@ -1,6 +1,9 @@
 Changelog
 ------------
 
+##### 0.6.6
+Tweaked the bottom margin of `li` items in the default theme.
+
 ##### 0.6.5
 Drop-down navigation now properly truncates long text with "...".
 Tweaked paragraphs to use bottom margin only for default theme.
