@@ -171,6 +171,8 @@ export default class NavigateToSlide extends Component {
       classNames.push('VirtualizedSelectOptionHeader')
     }
 
+    const text = option[labelKey]
+
     const events = option.disabled
       ? {}
       : {
@@ -179,14 +181,17 @@ export default class NavigateToSlide extends Component {
       }
 
     return (
-      <Row
+      <div
         className={classNames.join(' ')}
         key={key}
         style={style}
+        title={text}
         {...events}
       >
-        {option[labelKey]}
-      </Row>
+        <Row>
+          {text}
+        </Row>
+      </div>
     )
   }
 }

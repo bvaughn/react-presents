@@ -1,6 +1,10 @@
 Changelog
 ------------
 
+##### 0.6.5
+Drop-down navigation now properly truncates long text with "...".
+Tweaked paragraphs to use bottom margin only for default theme.
+
 ##### 0.6.4
 Removed dependency on Typography.js.
 
