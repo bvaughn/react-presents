@@ -7,8 +7,7 @@ Install `react-presents` using npm.
 npm install react-presents --save
 ```
 
-ES6, CommonJS, and UMD builds are available with each distribution.
-For example:
+ES6, CommonJS, and UMD builds are available with each distribution. For example:
 
 ```js
 // Import the components you want like so:
@@ -23,27 +22,83 @@ Alternately you can load a global-friendly UMD build which exposes a global `Rea
 
 Now you're ready to start using the components.
 
+For an example of a the kind of presentations that can be created with react-presents, check out my Connect Tech 2016 presentation on windowing with React: [bvaughn.github.io/connect-tech-2016](https://bvaughn.github.io/connect-tech-2016/).
+
 Example Usage
 ---------
 
+### Creating a Slide
+Presentation slides are simple to create. Below is a couple of example slides:
 ```jsx
-// Example of using Webpack to bulk-load slides:
-const slides = require.context('./Slides/', false, /\.js$/)
-  .keys()
-  .map((filename) => filename.replace('./', ''))
-  .map((filename) => require(`./Slides/${filename}`).default)
+/* SomeSlide.js */
+import React from 'react'
+import { ContentSlide, Step } from 'react-presents'
 
-// Example of supporting jump-to-sides via a drop-down menu:
+export default () => (
+  <ContentSlide>
+    <h1>A simple slide</h1>
+    <p>Slides can contain multiple steps.</p>
+    <ul>
+      <Step index={1} exact><li>Sub-text can appear only for a specific step</li></Step>
+      <Step index={2}><li>Or it can be additive</li></Step>
+      <Step index={3}><li>(By default it is additive)</li></Step>
+      <Step index={4} maxIndex={5}><li>They can also be shown for a range</li></Step>
+    </ul>
+  </ContentSlide>
+)
+```
+
+### Automatically Loading Slides
+Using a bundler like Webpack, you can auto-load slides using an approach like follows:
+
+```jsx
+/* Application.js */
+const slides = require.context('./path/to/slides/', false, /\.js$/)
+  .keys()
+  .map((filename) => filename.replace('./', './path/to/slides/'))
+  .map((path) => require(path).default)
+```
+
+### Creating a Nav Menu
+Once you have an array of loaded slides, you can auto-populate the options for a nav menu using an approach like so:
+
+```jsx
+/* Application.js */
 const options = slides
   .map((slide, index) => ({
     label: slide.title,
     value: index
   }))
   .filter((option) => option.label)
+```
 
-// Example of rendering all of your slides in the order they loaded:
+Note that the above approach assumes that slides have a static `title` attribute, eg:
+
+```jsx
+/* SomeSlide.js */
+import React from 'react'
+import { ContentSlide } from 'react-presents'
+
+const slide = () => (
+  <ContentSlide>
+    <h1>{slide.title}</h1>
+    {/* Your content goes here */}
+  </ContentSlide>
+)
+
+slide.title = 'The first slide'
+
+export default slide
+```
+
+Also note that [react-select](https://github.com/JedWatson/react-select) is used beneath the hood so the `options` array you construct must be compatible with it.
+
+### Creating a presentation
+Assuming you have an array of slides and options for the drop-down nav, you can create a presentation like follows:
+```jsx
 import React from 'react'
 import { Presentation, Slide } from 'react-presents'
+
 export default () => (
   <Presentation>
     {slides.map((Component, index) => (
@@ -59,49 +114,68 @@ export default () => (
     )}
   </Presentation>
 )
+```
 
-// Example of a slide:
-import React from 'react'
-import { Step } from 'react-presents'
-export default () => (
-  <div>
-    <h1>A simple slide</h1>
-    <ul>
-      <li>Slides can contain multiple steps.</li>
-      <Step index={1} exact><li>Sub-text can appear only for a specific step</li></Step>
-      <Step index={2}><li>Or it can be additive</li></Step>
-      <Step index={3}><li>(By default it is additive)</li></Step>
-    </ul>
-  </div>
-)
-
-// Example of a slide with a DropDownNav title:
-import React from 'react'
-import { Code, ContentSlide } from '../../modules'
-const slide = ({ stepIndex }) => (
-  <ContentSlide>
-    <h1>Syntax highlighting</h1>
-    <p>Slides can also contain syntax highlighting:</p>
-    <Code
-      dimLines={[[0,1]]}
-      highlightLines={[[3,5]]}
-      value={require('raw!path/to/code.js')}
-    />
-  </ContentSlide>
-)
-
-slide.title = 'Syntax highlighting'
-
-export default slide
-
-// To disable the default theme use the :disableTheme property:
+A default theme is provided with react-presents. You can disable this theme by specifying the `disableTheme` property:
 ```jsx
 <Presentation disableTheme>
   {slides}
 </Presentation>
 ```
 
-```
+Api
+---------
+
+### Code
+Syntax highlighting powered by [react-codemirror](https://github.com/JedWatson/react-codemirror).
+
+| Property | Type | Required | Description |
+|:---|:---|:---:|:---|
+| codeMirrorOptions | object | | Configuration obect to pass to CodeMirror |
+| dimLines | array | | Array of line-number ranges for lines that should be dimmed |
+| highlightLines | array | | Array of line-number ranges for lines that should be highlighted |
+| value | string | ✓ | String to highlight |
+
+### ContentSlide
+Slide container with basic formatting. Intended for slides with moderate amounts of content.
+
+| Property | Type | Required | Description |
+|:---|:---|:---:|:---|
+| children | node | | Any valid React node |
+
+### Presentation
+Main presentation component, a collection of slides.
+
+| Property | Type | Required | Description |
+|:---|:---|:---:|:---|
+| children | any | ✓ | Any React node (typically slides) |
+| disableTheme | bool | | Do not set default theme/styles |
+| router | any | | Specific [react-router](https://github.com/ReactTraining/react-router/) implementation to use; `HashRouter` is used by default |
+
+### Slide
+An individual slide. Slides are automatically mapped to urls (based on their position within the larger collection of slides). Each slide must specify _either_ a React component _or_ a render callback.
+
+| Property | Type | Required | Description |
+|:---|:---|:---:|:---|
+| component | node | | Any valid React node |
+| render | function | | Function that returns a React element |
+
+### Step
+Helper component for deferring sections of a slide's content. This component allows a single slide to be broken down into multiple steps (eg bullet points).
+
+| Property | Type | Required | Description |
+|:---|:---|:---:|:---|
+| children | node | ✓ | Any valid React node |
+| exact | bool | ✓ | Only show content when the slide's current step index is exactly the `index` specified |
+| index | number | | Don't show child content until the current step index is at least equal to this |
+| maxIndex | number | | Don't show child content if the current step index exceeds this |
+
+### TitleSlide
+Slide container with basic formatting. Intended for sparse content, title slides.
+
+| Property | Type | Required | Description |
+|:---|:---|:---:|:---|
+| children | node | | Any valid React node |
 
 License
 ---------
