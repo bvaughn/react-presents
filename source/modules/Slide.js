@@ -13,7 +13,8 @@ export default class Slide extends Component {
 
   static propTypes = {
     component: PropTypes.any,
-    render: PropTypes.any
+    render: PropTypes.any,
+    showNotes: PropTypes.bool
   };
 
   constructor (props, context) {
@@ -28,6 +29,7 @@ export default class Slide extends Component {
     const { presentation } = this.context
 
     this._pattern = presentation.getPatternForSlide(this)
+    this._slideIndex = presentation.getIndexForSlide(this)
   }
 
   componentWillUnmount () {
@@ -63,12 +65,13 @@ export default class Slide extends Component {
 
   _renderComponent () {
     const { presentation } = this.context
-    const { component: Component, render } = this.props
+    const { component: Component, render, showNotes } = this.props
+    const { _slideIndex: slideIndex } = this
 
     const stepIndex = presentation.getStepIndex()
 
     return typeof render === 'function'
-      ? render({ stepIndex })
-      : <Component stepIndex={stepIndex} />
+      ? render({ stepIndex, slideIndex, showNotes })
+      : <Component stepIndex={stepIndex} slideIndex={slideIndex} showNotes={showNotes} />
   }
 }
