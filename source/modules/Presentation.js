@@ -302,9 +302,11 @@ export default class Presentation extends Component {
         }
         break
       case 'ArrowLeft':
+      case 'PageUp':
         this.goBack()
         break
       case 'ArrowRight':
+      case 'PageDown':
       case 'Enter':
       case ' ':
         this.goForward()
