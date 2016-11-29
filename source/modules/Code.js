@@ -54,7 +54,7 @@ export default class Code extends Component {
   }
 
   render () {
-    const { codeMirrorOptions, value } = this.props
+    const { codeMirrorOptions, value, className } = this.props
 
     const options = {
       ...DEFAULT_CODE_MIRROR_OPTIONS,
@@ -62,7 +62,7 @@ export default class Code extends Component {
     }
 
     return (
-      <CodeMirrorTheme>
+      <CodeMirrorTheme className={className}>
         <CodeMirror
           options={options}
           ref={(ref) => {
