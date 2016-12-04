@@ -20,6 +20,7 @@ export default class Code extends Component {
   };
 
   static propTypes = {
+    className: PropTypes.object,
     codeMirrorOptions: PropTypes.object.isRequired,
     dimLines: PropTypes.array.isRequired,
     highlightLines: PropTypes.array.isRequired,

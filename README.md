@@ -131,6 +131,7 @@ Syntax highlighting powered by [react-codemirror](https://github.com/JedWatson/r
 
 | Property | Type | Required | Description |
 |:---|:---|:---:|:---|
+| className | string | | Optional CSS class name to attach to root code mirror node |
 | codeMirrorOptions | object | | Configuration obect to pass to CodeMirror |
 | dimLines | array | | Array of line-number ranges for lines that should be dimmed |
 | highlightLines | array | | Array of line-number ranges for lines that should be highlighted |
