@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Match } from 'react-router'
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components'
 import { presentationContext, slideContext } from './PropTypes'
 
 export default class Slide extends Component {
