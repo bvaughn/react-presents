@@ -210,9 +210,11 @@ export default class Presentation extends Component {
 
     switch (event.key) {
       case 'ArrowLeft':
+      case 'PageUp':
         this.goBack()
         break
       case 'ArrowRight':
+      case 'PageDown':
       case 'Enter':
       case ' ':
         this.goForward()
