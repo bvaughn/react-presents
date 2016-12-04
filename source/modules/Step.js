@@ -1,8 +1,9 @@
-import { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { presentationContext, slideContext } from './PropTypes'
 
 export default class Step extends Component {
   static contextTypes = {
+    pluginProps: PropTypes.object.isRequired,
     presentation: presentationContext.isRequired,
     slide: slideContext.isRequired
   };
@@ -30,9 +31,10 @@ export default class Step extends Component {
   }
 
   render () {
-    const { presentation } = this.context
+    const { pluginProps, presentation } = this.context
     const { children, exact, index, maxIndex } = this.props
 
+    const { isPresenterMode } = pluginProps
     const stepIndex = presentation.getStepIndex()
 
     let match
@@ -46,8 +48,16 @@ export default class Step extends Component {
       )
     }
 
-    return match
-      ? children
-      : null
+    if (match) {
+      return children
+    } else if (isPresenterMode) {
+      return (
+        <div style={{ opacity: 0.35 }}>
+          {children}
+        </div>
+      )
+    } else {
+      return null
+    }
   }
 }

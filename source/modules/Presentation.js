@@ -6,6 +6,7 @@ import TouchNav from './TouchNav'
 
 export default class Presentation extends Component {
   static childContextTypes = {
+    pluginProps: PropTypes.object.isRequired,
     presentation: presentationContext.isRequired
   };
 
@@ -23,17 +24,22 @@ export default class Presentation extends Component {
   constructor (props, context) {
     super(props, context)
 
+    this.state = {
+      pluginProps: {}
+    }
+
     this._index = 0
     this._slideIndex = 0
     this._slideIndexMap = {}
     this._stepIndex = 0
 
-    this.getPatternForSlide = this.getPatternForSlide.bind(this)
     this.getSlideIndex = this.getSlideIndex.bind(this)
+    this.getSlideMetadata = this.getSlideMetadata.bind(this)
     this.getStepIndex = this.getStepIndex.bind(this)
     this.goBack = this.goBack.bind(this)
     this.goForward = this.goForward.bind(this)
     this.goToSlide = this.goToSlide.bind(this)
+    this.setPluginProps = this.setPluginProps.bind(this)
     this._onKeyDown = this._onKeyDown.bind(this)
   }
 
@@ -46,43 +52,34 @@ export default class Presentation extends Component {
   }
 
   getChildContext () {
+    const { pluginProps } = this.state
+
     return {
+      pluginProps,
       presentation: this
     }
-  }
-
-  getPatternForSlide (slide) {
-    const slideIndex = this._index
-
-    this._slideIndexMap[slideIndex] = slide
-    this._index++
-
-    return this._createPath({ slideIndex })
   }
 
   getSlideIndex () {
     return this._slideIndex
   }
 
+  getSlideMetadata (slide) {
+    const slideIndex = this._index
+
+    this._slideIndexMap[slideIndex] = slide
+    this._index++
+
+    const pattern = this._createPath({ slideIndex })
+
+    return {
+      pattern,
+      slideIndex
+    }
+  }
+
   getStepIndex () {
     return this._stepIndex
-  }
-
-  isAtBeginning () {
-    return (
-      this._slideIndex === 0 &&
-      this._stepIndex === 0
-    )
-  }
-
-  isAtEnd () {
-    const numSlides = Object.keys(this._slideIndexMap).length
-    const numLastSlideSteps = this._getNumStepsForSlide(numSlides - 1)
-
-    return (
-      this._slideIndex === numSlides - 1 &&
-      this._stepIndex === numLastSlideSteps - 1
-    )
   }
 
   goBack () {
@@ -137,6 +134,34 @@ export default class Presentation extends Component {
 
       this._router.replaceWith(path)
     }
+  }
+
+  isAtBeginning () {
+    return (
+      this._slideIndex === 0 &&
+      this._stepIndex === 0
+    )
+  }
+
+  isAtEnd () {
+    const numSlides = Object.keys(this._slideIndexMap).length
+    const numLastSlideSteps = this._getNumStepsForSlide(numSlides - 1)
+
+    return (
+      this._slideIndex === numSlides - 1 &&
+      this._stepIndex === numLastSlideSteps - 1
+    )
+  }
+
+  setPluginProps (props) {
+    const { pluginProps } = this.state
+
+    this.setState({
+      pluginProps: {
+        ...pluginProps,
+        ...props
+      }
+    })
   }
 
   render () {

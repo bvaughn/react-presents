@@ -1,5 +1,5 @@
 import React from 'react'
-import { DropDownNav, Presentation, Slide } from '../modules'
+import { DropDownNav, Presentation, PresenterModePlugin, Slide } from '../modules'
 import './Application.css'
 
 // Automatically load all slides in the Slides folder
@@ -18,16 +18,18 @@ const options = slides
 
 export default () => (
   <Presentation>
+    <PresenterModePlugin />
+
     {slides.map((Component, index) => (
       <Slide
         component={Component}
         key={index}
       />
-    )).concat(
-      <DropDownNav
-        key='DropDownNav'
-        options={options}
-      />
-    )}
+    ))}
+
+    <DropDownNav
+      key='DropDownNav'
+      options={options}
+    />
   </Presentation>
 )

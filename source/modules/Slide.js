@@ -8,6 +8,7 @@ export default class Slide extends Component {
   };
 
   static contextTypes = {
+    pluginProps: PropTypes.object.isRequired,
     presentation: presentationContext.isRequired
   };
 
@@ -26,8 +27,10 @@ export default class Slide extends Component {
 
   componentWillMount () {
     const { presentation } = this.context
+    const { pattern, slideIndex } = presentation.getSlideMetadata(this)
 
-    this._pattern = presentation.getPatternForSlide(this)
+    this._pattern = pattern
+    this._slideIndex = slideIndex
   }
 
   componentWillUnmount () {
@@ -62,13 +65,24 @@ export default class Slide extends Component {
   }
 
   _renderComponent () {
-    const { presentation } = this.context
+    const { pluginProps, presentation } = this.context
     const { component: Component, render } = this.props
 
+    const { isPresenterMode } = pluginProps
+
+    const slideIndex = this._slideIndex
     const stepIndex = presentation.getStepIndex()
 
-    return typeof render === 'function'
-      ? render({ stepIndex })
-      : <Component stepIndex={stepIndex} />
+    if (typeof render === 'function') {
+      return render({ isPresenterMode, slideIndex, stepIndex })
+    } else {
+      return (
+        <Component
+          isPresenterMode={isPresenterMode}
+          slideIndex={slideIndex}
+          stepIndex={stepIndex}
+        />
+      )
+    }
   }
 }
