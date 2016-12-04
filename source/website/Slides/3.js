@@ -6,7 +6,7 @@ const slide = ({ isPresenterMode }) => (
     <h1>{slide.title}</h1>
     {isPresenterMode && (
       <em>
-        <i className='fa fa-user-secret' /> This sentence is only visible to the presenter.
+        <i className='fa fa-user-secret' /> This sentence (and the grayed-out bullet points below) are only visible to the presenter.
       </em>
     )}
     <ul>
