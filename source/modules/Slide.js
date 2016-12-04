@@ -8,13 +8,13 @@ export default class Slide extends Component {
   };
 
   static contextTypes = {
+    pluginProps: PropTypes.object.isRequired,
     presentation: presentationContext.isRequired
   };
 
   static propTypes = {
     component: PropTypes.any,
-    render: PropTypes.any,
-    showNotes: PropTypes.bool
+    render: PropTypes.any
   };
 
   constructor (props, context) {
@@ -65,18 +65,20 @@ export default class Slide extends Component {
   }
 
   _renderComponent () {
-    const { presentation } = this.context
-    const { component: Component, render, showNotes } = this.props
+    const { pluginProps, presentation } = this.context
+    const { component: Component, render } = this.props
+
+    const { isPresenterMode } = pluginProps
 
     const slideIndex = this._slideIndex
     const stepIndex = presentation.getStepIndex()
 
     if (typeof render === 'function') {
-      return render({ showNotes, slideIndex, stepIndex })
+      return render({ isPresenterMode, slideIndex, stepIndex })
     } else {
       return (
         <Component
-          showNotes={showNotes}
+          isPresenterMode={isPresenterMode}
           slideIndex={slideIndex}
           stepIndex={stepIndex}
         />

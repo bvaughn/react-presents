@@ -1,10 +1,10 @@
 import React from 'react'
 import { ContentSlide, Step } from '../../modules'
 
-const slide = ({ showNotes }) => (
+const slide = ({ isPresenterMode }) => (
   <ContentSlide>
     <h1>{slide.title}</h1>
-    {showNotes && (
+    {isPresenterMode && (
       <em>
         <i className='fa fa-user-secret' /> This sentence is only visible to the presenter.
       </em>

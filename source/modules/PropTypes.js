@@ -8,7 +8,8 @@ export const presentationContext = PropTypes.shape({
   goForward: PropTypes.func.isRequired,
   goToSlide: PropTypes.func.isRequired,
   isAtBeginning: PropTypes.func.isRequired,
-  isAtEnd: PropTypes.func.isRequired
+  isAtEnd: PropTypes.func.isRequired,
+  setPluginProps: PropTypes.func.isRequired
 })
 
 export const slideContext = PropTypes.shape({
