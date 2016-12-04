@@ -39,8 +39,8 @@ export default class Presentation extends Component {
     // execution by the window with the slides
     this._attachedCallbackName = ''
 
-    this.getPatternForSlide = this.getPatternForSlide.bind(this)
     this.getSlideIndex = this.getSlideIndex.bind(this)
+    this.getSlideMetadata = this.getSlideMetadata.bind(this)
     this.getStepIndex = this.getStepIndex.bind(this)
     this.goBack = this.goBack.bind(this)
     this.goForward = this.goForward.bind(this)
@@ -82,30 +82,20 @@ export default class Presentation extends Component {
     }
   }
 
-  getPatternForSlide (slide) {
+  getSlideIndex () {
+    return this._slideIndex
+  }
+
+  getSlideMetadata (slide) {
     const slideIndex = this._index
 
     this._slideIndexMap[slideIndex] = slide
     this._index++
 
-    return this._createPath({ slideIndex })
-  }
-
-  getIndexForSlide (slide) {
-    let slideIndex = -1
-    Object.keys(this._slideIndexMap).some(index => {
-      if (this._slideIndexMap[index] === slide) {
-        slideIndex = parseInt(index, 10)
-        return true
-      }
-      return false
-    })
-
-    return slideIndex
-  }
-
-  getSlideIndex () {
-    return this._slideIndex
+    return {
+      pattern: this._createPath({ slideIndex }),
+      slideIndex
+    }
   }
 
   getStepIndex () {

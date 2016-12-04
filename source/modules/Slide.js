@@ -27,9 +27,10 @@ export default class Slide extends Component {
 
   componentWillMount () {
     const { presentation } = this.context
+    const { pattern, slideIndex } = presentation.getSlideMetadata(this)
 
-    this._pattern = presentation.getPatternForSlide(this)
-    this._slideIndex = presentation.getIndexForSlide(this)
+    this._pattern = pattern
+    this._slideIndex = slideIndex
   }
 
   componentWillUnmount () {
@@ -66,12 +67,20 @@ export default class Slide extends Component {
   _renderComponent () {
     const { presentation } = this.context
     const { component: Component, render, showNotes } = this.props
-    const { _slideIndex: slideIndex } = this
 
+    const slideIndex = this._slideIndex
     const stepIndex = presentation.getStepIndex()
 
-    return typeof render === 'function'
-      ? render({ stepIndex, slideIndex, showNotes })
-      : <Component stepIndex={stepIndex} slideIndex={slideIndex} showNotes={showNotes} />
+    if (typeof render === 'function') {
+      return render({ showNotes, slideIndex, stepIndex })
+    } else {
+      return (
+        <Component
+          showNotes={showNotes}
+          slideIndex={slideIndex}
+          stepIndex={stepIndex}
+        />
+      )
+    }
   }
 }
