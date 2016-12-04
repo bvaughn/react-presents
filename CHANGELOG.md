@@ -8,6 +8,8 @@ Support added for remote control (via `PageUp` and `PageDown` events.)
 
 Theming support improved for CodeMirror styles via new `Code` component prop, `className`.
 
+Special thanks to [**@jesstelford**](https://github.com/jesstelford) for his help with this release.
+
 ##### 0.6.6
 Tweaked the bottom margin of `li` items in the default theme.
 
