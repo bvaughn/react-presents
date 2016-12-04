@@ -1,11 +1,11 @@
 import styled from 'styled-components'
+import presenterSlideStyle from './presenterSlideStyle'
 
 export default styled.div`
   height: 100%;
   padding: 1rem;
 
-  outline: ${(props) => props.theme.isPresenterMode ? '0.25rem solid #37F' : 'none'};
-  outline-offset: -0.25rem;
+  ${presenterSlideStyle}
 
   @media (max-width: 600px) {
     padding: 0.5rem;

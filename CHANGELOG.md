@@ -1,6 +1,9 @@
 Changelog
 ------------
 
+##### 0.7.1
+Improved presenter mode indicator style.
+
 ##### 0.7.0
 New "presenter mode" supported. Typing "p" while viewing a slide will open a synced presenter slide. Presenter mode automatically displays upcoming `Step` content and supports other, presenter-only custom content via new slide render param `isPresenterMode`.
 
