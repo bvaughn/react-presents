@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Match } from 'react-router'
+import { ThemeProvider } from 'styled-components';
 import { presentationContext, slideContext } from './PropTypes'
 
 export default class Slide extends Component {
@@ -73,10 +74,12 @@ export default class Slide extends Component {
     const slideIndex = this._slideIndex
     const stepIndex = presentation.getStepIndex()
 
+    let rendered
+
     if (typeof render === 'function') {
-      return render({ isPresenterMode, slideIndex, stepIndex })
+      rendered = render({ isPresenterMode, slideIndex, stepIndex })
     } else {
-      return (
+      rendered = (
         <Component
           isPresenterMode={isPresenterMode}
           slideIndex={slideIndex}
@@ -84,5 +87,11 @@ export default class Slide extends Component {
         />
       )
     }
+
+    return (
+      <ThemeProvider theme={{ isPresenterMode }}>
+        {rendered}
+      </ThemeProvider>
+    )
   }
 }

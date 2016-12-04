@@ -1,6 +1,13 @@
 Changelog
 ------------
 
+##### 0.7.0
+New "presenter mode" supported. Typing "p" while viewing a slide will open a synced presenter slide. Presenter mode automatically displays upcoming `Step` content and supports other, presenter-only custom content via new slide render param `isPresenterMode`.
+
+Support added for remote control (via `PageUp` and `PageDown` events.)
+
+Theming support improved for CodeMirror styles via new `Code` component prop, `className`.
+
 ##### 0.6.6
 Tweaked the bottom margin of `li` items in the default theme.
 
