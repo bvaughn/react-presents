@@ -104,7 +104,7 @@ export default class PresenterModePlugin extends Component {
   }
 
   _signalParent (path) {
-    if (!window.opener) {
+    if (!window.opener || typeof window.opener[this._parentWindowID] !== 'function') {
       return
     }
     window.opener[this._parentWindowID](path)
