@@ -104,10 +104,16 @@ export default class PresenterModePlugin extends Component {
   }
 
   _signalParent (path) {
-    if (!window.opener) {
-      return
+    if (window.opener) {
+      if (typeof window.opener[this._parentWindowID] !== 'function') {
+        // When hot reloading updates slides, presenter mode gets disconnected.
+        // In this case we should close the secondary/presenter slide.
+        window.close()
+      } else if (window.opener) {
+        // Otherwise, sync route changes between windows.
+        window.opener[this._parentWindowID](path)
+      }
     }
-    window.opener[this._parentWindowID](path)
   }
 
   _togglePresenterMode (path) {
