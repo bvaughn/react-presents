@@ -1,6 +1,10 @@
 Changelog
 ------------
 
+##### 0.7.2
+Fixed `package.json` dependencies.
+Presenter-mode tab auto closes when HMR changes things (at which point the windows are diconnected anyway).
+
 ##### 0.7.1
 Improved presenter mode indicator style.
 
