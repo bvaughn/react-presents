@@ -1,6 +1,6 @@
 {
   "name": "react-presents",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Slideshow framework built w/ react-router 4",
   "main": "dist/commonjs/index.js",
   "module": "dist/es/index.js",

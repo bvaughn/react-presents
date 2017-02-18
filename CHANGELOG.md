@@ -1,6 +1,9 @@
 Changelog
 ------------
 
+##### 0.7.3
+Updated to support newer `react-router` / `react-router-dom` version 4.0.0-beta.6 API.
+
 ##### 0.7.2
 Fixed `package.json` dependencies.
 Presenter-mode tab auto closes when HMR changes things (at which point the windows are diconnected anyway).
