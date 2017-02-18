@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Match } from 'react-router'
+import { Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { presentationContext, slideContext } from './PropTypes'
 
@@ -28,9 +28,9 @@ export default class Slide extends Component {
 
   componentWillMount () {
     const { presentation } = this.context
-    const { pattern, slideIndex } = presentation.getSlideMetadata(this)
+    const { path, slideIndex } = presentation.getSlideMetadata(this)
 
-    this._pattern = pattern
+    this._path = path
     this._slideIndex = slideIndex
   }
 
@@ -54,8 +54,9 @@ export default class Slide extends Component {
 
   render () {
     return (
-      <Match
-        pattern={this._pattern}
+      <Route
+        exact
+        path={this._path}
         render={this._renderComponent}
       />
     )

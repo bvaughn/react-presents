@@ -1,15 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import { HashRouter, Match, Redirect } from 'react-router'
+import { Redirect } from 'react-router'
+import { HashRouter, Route } from 'react-router-dom'
 import DefaultTheme from './DefaultTheme'
 import { presentationContext } from './PropTypes'
 import TouchNav from './TouchNav'
 
 export default class Presentation extends Component {
-  static childContextTypes = {
-    pluginProps: PropTypes.object.isRequired,
-    presentation: presentationContext.isRequired
-  };
-
   static defaultProps = {
     disableTheme: false,
     router: HashRouter
@@ -19,6 +15,33 @@ export default class Presentation extends Component {
     children: PropTypes.any.isRequired,
     disableTheme: PropTypes.bool.isRequired,
     router: PropTypes.any.isRequired
+  };
+
+  render () {
+    const { router: Router } = this.props
+
+    return (
+      <Router>
+        <PresentationInner {...this.props} />
+      </Router>
+    )
+  }
+}
+
+// Separate inner class due to Router context dependencies.
+class PresentationInner extends Component {
+  static childContextTypes = {
+    pluginProps: PropTypes.object.isRequired,
+    presentation: presentationContext.isRequired
+  };
+
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
+
+  static propTypes = {
+    children: PropTypes.any.isRequired,
+    disableTheme: PropTypes.bool.isRequired
   };
 
   constructor (props, context) {
@@ -51,6 +74,10 @@ export default class Presentation extends Component {
     document.body.removeEventListener('keydown', this._onKeyDown)
   }
 
+  componentWillUpdate (nextProps, nextState) {
+    this._parseLocation(window.location)
+  }
+
   getChildContext () {
     const { pluginProps } = this.state
 
@@ -70,10 +97,10 @@ export default class Presentation extends Component {
     this._slideIndexMap[slideIndex] = slide
     this._index++
 
-    const pattern = this._createPath({ slideIndex })
+    const path = this._createPath({ slideIndex })
 
     return {
-      pattern,
+      path,
       slideIndex
     }
   }
@@ -130,9 +157,12 @@ export default class Presentation extends Component {
       slideIndex !== this._slideIndex ||
       stepIndex !== this._stepIndex
     ) {
+      const { router } = this.context
       const path = this._createPath({ slideIndex, stepIndex })
 
-      this._router.replaceWith(path)
+      router.replace(path)
+
+      this.forceUpdate()
     }
   }
 
@@ -165,43 +195,34 @@ export default class Presentation extends Component {
   }
 
   render () {
-    const { children, disableTheme, router: Router } = this.props
+    const { children, disableTheme } = this.props
 
     return (
-      <Router>
-        {({ location, router }) => {
-          this._router = router
-          this._parseLocation(location)
-
-          return (
-            <div
-              style={{
-                height: '100%',
-                width: '100%'
-              }}
-            >
-              {!disableTheme && (
-                <DefaultTheme />
-              )}
-
-              <Match
-                exactly
-                pattern='/'
-                render={() => (
-                  <Redirect to='/0/0' />
-                )}
-              />
-
-              {typeof children === 'function'
-                ? children({ presentation: this })
-                : children
-              }
-
-              <TouchNav />
-            </div>
-          )
+      <div
+        style={{
+          height: '100%',
+          width: '100%'
         }}
-      </Router>
+      >
+        {!disableTheme && (
+          <DefaultTheme />
+        )}
+
+        <Route
+          exact
+          path='/'
+          render={() => (
+            <Redirect to='/0/0' />
+          )}
+        />
+
+        {typeof children === 'function'
+          ? children({ presentation: this })
+          : children
+        }
+
+        <TouchNav />
+      </div>
     )
   }
 
@@ -217,7 +238,7 @@ export default class Presentation extends Component {
   }
 
   _parseLocation (location) {
-    const parsed = location.pathname.match(/(\d+)\/(\d+)/)
+    const parsed = (location.pathname + location.hash).match(/(\d+)\/(\d+)/)
 
     if (parsed) {
       this._slideIndex = parseInt(parsed[1], 10)
