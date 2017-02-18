@@ -1,6 +1,9 @@
 Changelog
 ------------
 
+##### 0.7.4
+Presentation parses location (slide index) on-mount as well as on-update.
+
 ##### 0.7.3
 Updated to support newer `react-router` / `react-router-dom` version 4.0.0-beta.6 API.
 
