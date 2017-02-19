@@ -86,7 +86,7 @@ const globalStyles = `
   }
 
   button:disabled {
-    background-color: #CFD8DC;
+    opacity: 0.5;
     cursor: default;
   }
 `

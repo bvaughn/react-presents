@@ -1,6 +1,9 @@
 Changelog
 ------------
 
+##### 0.7.6
+CSS tweaks to make it easier to customize touch-nav style.
+
 ##### 0.7.5
 Move location-parsing to will-update to fix bug.
 
