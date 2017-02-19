@@ -1,6 +1,9 @@
 Changelog
 ------------
 
+##### 0.7.5
+Move location-parsing to will-update to fix bug.
+
 ##### 0.7.4
 Presentation parses location (slide index) on-mount as well as on-update.
 

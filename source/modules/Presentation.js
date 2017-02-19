@@ -68,16 +68,18 @@ class PresentationInner extends Component {
 
   componentDidMount () {
     document.body.addEventListener('keydown', this._onKeyDown)
-
-    this._parseLocation(window.location)
   }
 
-  componentDidUpdate (prevProps, prevState) {
+  componentWillMount () {
     this._parseLocation(window.location)
   }
 
   componentWillUnmount () {
     document.body.removeEventListener('keydown', this._onKeyDown)
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    this._parseLocation(window.location)
   }
 
   getChildContext () {
