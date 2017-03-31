@@ -164,7 +164,11 @@ class PresentationInner extends Component {
       const { router } = this.context
       const path = this._createPath({ slideIndex, stepIndex })
 
-      router.history.replace(path)
+      if (typeof router.replace === 'function') {
+        router.replace(path) // react-router@4.0.0-beta.6
+      } else {
+        router.history.replace(path) // react-router@4.0.0
+      }
 
       this.forceUpdate()
     }
