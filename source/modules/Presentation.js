@@ -164,7 +164,7 @@ class PresentationInner extends Component {
       const { router } = this.context
       const path = this._createPath({ slideIndex, stepIndex })
 
-      router.replace(path)
+      router.history.replace(path)
 
       this.forceUpdate()
     }
