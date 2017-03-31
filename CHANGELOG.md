@@ -1,6 +1,11 @@
 Changelog
 ------------
 
+##### 0.7.7
+Compatible with `react-router`/`react-router-dom` versions 4.0.0-beta.6 _and_ 4.0.0 final.
+
+Special thanks to [**@kirillku**](https://github.com/kirillku) for his help with this release.
+
 ##### 0.7.6
 CSS tweaks to make it easier to customize touch-nav style.
 
