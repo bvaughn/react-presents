@@ -258,7 +258,14 @@ class PresentationInner extends Component {
   }
 
   _onKeyDown (event) {
-    if (event.target.tagName === 'INPUT') {
+    // Ignore keyboard events if the user is entering text
+    // Or interacting with form controls.
+    if (
+      event.target.tagName === 'INPUT' ||
+      event.target.tagName === 'SELECT' ||
+      event.target.tagName === 'TEXTAREA' ||
+      event.target.isContentEditable === true
+    ) {
       return
     }
 
