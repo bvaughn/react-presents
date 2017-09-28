@@ -1,6 +1,10 @@
 Changelog
 ------------
 
+##### 0.7.9
+Updated version of `react-virtualized-select` that's used within the project.
+Replaced `React.PropTypes` references with `prop-types` library.
+
 ##### 0.7.8
 Ignore keyboard events for navigation purposes if the user is entering text or interacting with form controls.
 
