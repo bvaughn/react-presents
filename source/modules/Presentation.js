@@ -15,6 +15,7 @@ export default class Presentation extends Component {
   static propTypes = {
     children: PropTypes.any.isRequired,
     disableTheme: PropTypes.bool.isRequired,
+    keyMap: PropTypes.any,
     router: PropTypes.any.isRequired
   };
 
@@ -42,6 +43,7 @@ class PresentationInner extends Component {
 
   static propTypes = {
     children: PropTypes.any.isRequired,
+    keyMap: PropTypes.any,
     disableTheme: PropTypes.bool.isRequired
   };
 
@@ -269,16 +271,15 @@ class PresentationInner extends Component {
     ) {
       return
     }
-
-    switch (event.key) {
-      case 'ArrowLeft':
-      case 'PageUp':
+    const [ArrowLeft, PageUp] = new Array(2).fill('goBack')
+    const [ArrowRight, PageDown] = new Array(2).fill('goForward')
+    const keyMap = this.props.keyMap ||
+      { ArrowLeft, ArrowRight, PageUp, PageDown, ' ': 'goForward' }
+    switch (keyMap[event.key]) {
+      case 'goBack':
         this.goBack()
         break
-      case 'ArrowRight':
-      case 'PageDown':
-      case 'Enter':
-      case ' ':
+      case 'goForward':
         this.goForward()
         break
       default:
