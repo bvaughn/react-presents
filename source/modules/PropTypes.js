@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import PropTypes from 'prop-types'
 
 export const presentationContext = PropTypes.shape({
   getSlideIndex: PropTypes.func.isRequired,

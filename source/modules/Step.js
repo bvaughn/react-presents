@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { presentationContext, slideContext } from './PropTypes'
 
 export default class Step extends Component {
