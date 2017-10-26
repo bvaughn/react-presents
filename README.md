@@ -28,7 +28,7 @@ Example Usage
 ---------
 
 ### Creating a Slide
-Presentation slides are simple to create. Below is a couple of example slides:
+Presentation slides are simple to create. You can use `TitleSlide` and `ContentSlide` with some predefined styles, or simply create a slide with custom layout by wrapping its content in `div` with 100% height and width. Below is a couple of example slides:
 ```jsx
 /* SomeSlide.js */
 import React from 'react'
