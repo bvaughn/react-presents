@@ -51,12 +51,23 @@ export default () => (
 ### Automatically Loading Slides
 Using a bundler like Webpack, you can auto-load slides using an approach like follows:
 
+#### Webpack 2
 ```jsx
 /* Application.js */
 const slides = require.context('./path/to/slides/', false, /\.js$/)
   .keys()
   .map((filename) => filename.replace('./', './path/to/slides/'))
   .map((path) => require(path).default)
+```
+
+#### Webpack 3
+```jsx
+/* Application.js */
+const slides = []
+const context = require.context('./path/to/slides/', false, /\.js$/)
+context
+  .keys()
+  .forEach(key => slides.push(context(key).default))
 ```
 
 ### Creating a Nav Menu
