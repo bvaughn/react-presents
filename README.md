@@ -108,7 +108,7 @@ Also note that [react-select](https://github.com/JedWatson/react-select) is used
 Assuming you have an array of slides and options for the drop-down nav, you can create a presentation like follows:
 ```jsx
 import React from 'react'
-import { Presentation, Slide } from 'react-presents'
+import { Presentation, Slide, DropDownNav } from 'react-presents'
 
 export default () => (
   <Presentation>
