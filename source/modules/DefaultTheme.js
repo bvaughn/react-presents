@@ -1,23 +1,20 @@
-import React, { Component } from 'react'
-import { injectGlobal } from 'styled-components'
+import React, { Fragment } from 'react'
+import { createGlobalStyle } from 'styled-components'
 
-export default class DefaultTheme extends Component {
-  componentWillMount () {
-    injectGlobal`${globalStyles}`
-  }
-
-  render () {
-    return (
+export default function DefaultTheme () {
+  return (
+    <Fragment>
+      <GlobalStyles />
       <link
         href='https://fonts.googleapis.com/css?family=Droid+Sans|Yanone+Kaffeesatz'
         rel='stylesheet'
         type='text/css'
       />
-    )
-  }
+    </Fragment>
+  )
 }
 
-const globalStyles = `
+const GlobalStyles = createGlobalStyle`
   html, body {
     height: 100%;
     box-sizing: border-box;

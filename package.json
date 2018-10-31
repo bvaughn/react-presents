@@ -83,8 +83,8 @@
     "postcss-cli": "^2.3.3",
     "postcss-loader": "^0.9.1",
     "raw-loader": "^0.5.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.2",
     "redbox-react": "^1.0.1",
@@ -105,10 +105,10 @@
     "react-router": "^4.0.0-beta.6",
     "react-router-dom": "^4.0.0-beta.6",
     "react-virtualized-select": "^3.1.0",
-    "styled-components": "^1.0.8"
+    "styled-components": "^4.0.3"
   },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0 || ^16.0.0-alpha",
-    "react-dom": "^0.14.0 || ^15.0.0 || ^16.0.0-alpha"
+    "react": ">= 16.3.0",
+    "react-dom": ">= 16.3.0"
   }
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-virtualized-select'
 import { findDOMNode } from 'react-dom'
@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import IconButton from './IconButton'
 import { IconMore } from './Icons'
 import { presentationContext } from './PropTypes'
-import './reactSelectStyles'
+import ReactSelectStyles from './ReactSelectStyles'
 
 // @TODO Maybe register with Presentation and include via TouchNav?
 const ButtonGroup = styled.div`
@@ -88,24 +88,27 @@ export default class NavigateToSlide extends Component {
 
     if (active) {
       return (
-        <Overlay>
-          <SelectWrapper>
-            <Select
-              autofocus
-              className='VirtualizedSelect'
-              clearable={false}
-              options={options}
-              onChange={this._onChange}
-              onInputKeyDown={this._onKeyDown}
-              optionHeight={35}
-              optionRenderer={this._optionRenderer}
-              ref={(ref) => {
-                this._select = ref
-              }}
-              value={slideIndex}
-            />
-          </SelectWrapper>
-        </Overlay>
+        <Fragment>
+          <ReactSelectStyles />
+          <Overlay>
+            <SelectWrapper>
+              <Select
+                autofocus
+                className='VirtualizedSelect'
+                clearable={false}
+                options={options}
+                onChange={this._onChange}
+                onInputKeyDown={this._onKeyDown}
+                optionHeight={35}
+                optionRenderer={this._optionRenderer}
+                ref={(ref) => {
+                  this._select = ref
+                }}
+                value={slideIndex}
+              />
+            </SelectWrapper>
+          </Overlay>
+        </Fragment>
       )
     } else if (options.length) {
       return (
