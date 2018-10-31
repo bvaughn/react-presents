@@ -1,6 +1,9 @@
 Changelog
 ------------
 
+##### 0.8.0
+Updated to React 16.6 and styled-components 4.
+
 ##### 0.7.9
 Updated version of `react-virtualized-select` that's used within the project.
 Replaced `React.PropTypes` references with `prop-types` library.
