@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import IconButton from './IconButton'
 import { IconMore } from './Icons'
 import { presentationContext } from './PropTypes'
-import ReactSelectStyles from './ReactSelectStyles'
+import ReactSelectStyles from './reactSelectStyles'
 
 // @TODO Maybe register with Presentation and include via TouchNav?
 const ButtonGroup = styled.div`
