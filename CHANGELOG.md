@@ -1,6 +1,9 @@
 Changelog
 ------------
 
+##### 0.8.1
+Bug fix (#24, #25)
+
 ##### 0.8.0
 Updated to React 16.6 and styled-components 4.
 
