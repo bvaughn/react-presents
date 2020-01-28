@@ -134,6 +134,15 @@ A default theme is provided with react-presents. You can disable this theme by s
 </Presentation>
 ```
 
+#### Presenter mode
+To include presenter mode, you could use `PresenterModePlugin` enabling you to move to presenter mode by pressing `p` or `P` as shown below:
+```jsx
+<Presentation>
+  <PresenterModePlugin />
+  {slides}
+</Presentation>
+```
+
 Api
 ---------
 
