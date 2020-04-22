@@ -9,7 +9,8 @@ import TouchNav from './TouchNav'
 export default class Presentation extends Component {
   static defaultProps = {
     disableTheme: false,
-    router: HashRouter
+    router: HashRouter,
+    disableTouch: false
   };
 
   static propTypes = {
@@ -204,7 +205,7 @@ class PresentationInner extends Component {
   }
 
   render () {
-    const { children, disableTheme } = this.props
+    const { children, disableTheme, disableTouch } = this.props
 
     return (
       <div
@@ -230,7 +231,9 @@ class PresentationInner extends Component {
           : children
         }
 
-        <TouchNav />
+        {!disableTouch && (
+          <TouchNav />
+        )}
       </div>
     )
   }

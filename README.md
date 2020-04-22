@@ -171,6 +171,7 @@ Main presentation component, a collection of slides.
 |:---|:---|:---:|:---|
 | children | any | ✓ | Any React node (typically slides) |
 | disableTheme | bool | | Do not set default theme/styles |
+| disableTouch | bool | | Do not show touch navigation |
 | router | any | | Specific [react-router](https://github.com/ReactTraining/react-router/) implementation to use; `HashRouter` is used by default |
 
 ### Slide
